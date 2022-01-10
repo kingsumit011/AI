@@ -1,22 +1,10 @@
 import random
 import copy
 
-n = 3
- 
+
 row = [ 1, 0, -1, 0 ]
 col = [ 0, -1, 0, 1 ]
 
-
-initial = [ [ 1, 2, 3 ],
-            [ 8,7,4 ],
-            [ 0, 6,5 ] ]
-
-f = [ [ 1, 2, 3 ],
-     [ 8, 0, 4 ],
-     [ 7, 6, 5 ] ]
-          
-open = []
-closed = []
 numStep = 0
 
 class Data:
@@ -69,34 +57,33 @@ def test(child):
 
 def solve():
     while(open):
-        index = random.randint(0,len(open)-1)
-        if(moveGenration(open[index])) : 
+
+        if(moveGenration(open[0])) : 
             # print( "output : " + closed[-1] )
             print( "Solution Found \n  No OF Steps Taken : " + str(numStep))
             return
         else : 
-            print( " No OF Steps Taken : " +str(numStep) )
-            closed.append(open.pop(index))
+            # print( " No OF Steps Taken : " +str(numStep) )
+            closed.append(open.pop(0))
     print("Solution not Fount \n No of steps taken " + str(numStep))
 
-final = Data(f,0,0)
-open = [Data(initial ,[1,1],-1)]
-solve()
-
-# def inputMatrix():
-#     mat = []
-#     for x in range(n):
-#         a = []
-#         for y in range(n):
-#             a.append(int(input(f"Tell The element at position {x} , {y} ")))
-#             if(a[-1]==0): emptyPos = [x,y]
-#         mat.append(a)
-#     return Data(mat , emptyPos , -1)
-# if __name__ == '__main__' :
-#     global final
-#     n = int(input("Enter the value of "))
-#     print("Enter the element of intial matrix: ")
-#     open.append(inputMatrix())
-#     print("Enter the element of intial matrix: ")
-#     final = inputMatrix()
-#     solve()
+def inputMatrix():
+    mat = []
+    for x in range(n):
+        a = []
+        for y in range(n):
+            a.append(int(input(f"Tell The element at position {x} , {y} ")))
+            if(a[-1]==0): emptyPos = [x,y]
+        mat.append(a)
+    return Data(mat , emptyPos , -1)
+    
+if __name__ == '__main__' :
+    global n , final , openL , closed
+    openL = [] 
+    closed = []
+    n = int(input("Enter the value of "))
+    print("Enter the element of intial matrix: ")
+    open.append(inputMatrix())
+    print("Enter the element of intial matrix: ")
+    final = inputMatrix()
+    solve()
