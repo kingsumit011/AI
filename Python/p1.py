@@ -1,7 +1,5 @@
-import random
+# Programme 1 :- Write a program to solve the 8-Puzzle problem using Generate and Test Strategy.
 import copy
-
-
 row = [ 1, 0, -1, 0 ]
 col = [ 0, -1, 0, 1 ]
 
@@ -30,7 +28,7 @@ def moveGenration(cur):
         ):
             child = genrateNew(cur , i)
             if child not in closed: 
-                open.append(child)
+                openL.append(child)
                 if test(child) : return True
     return False
 
@@ -56,16 +54,16 @@ def test(child):
 
 
 def solve():
-    while(open):
+    while(openL ):
 
-        if(moveGenration(open[0])) : 
+        if(moveGenration(openL[0])) : 
             # print( "output : " + closed[-1] )
             print( "Solution Found \n  No OF Steps Taken : " + str(numStep))
             return
         else : 
             # print( " No OF Steps Taken : " +str(numStep) )
-            closed.append(open.pop(0))
-    print("Solution not Fount \n No of steps taken " + str(numStep))
+            closed.append(openL.pop(0))
+    print("Solution not Found \n No of steps taken " + str(numStep))
 
 def inputMatrix():
     mat = []
@@ -76,14 +74,14 @@ def inputMatrix():
             if(a[-1]==0): emptyPos = [x,y]
         mat.append(a)
     return Data(mat , emptyPos , -1)
-    
+
 if __name__ == '__main__' :
     global n , final , openL , closed
     openL = [] 
     closed = []
     n = int(input("Enter the value of "))
     print("Enter the element of intial matrix: ")
-    open.append(inputMatrix())
+    openL.append(inputMatrix())
     print("Enter the element of intial matrix: ")
     final = inputMatrix()
     solve()
